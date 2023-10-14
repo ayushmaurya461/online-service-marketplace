@@ -12,35 +12,30 @@ export class CarouselComponent implements OnInit, OnDestroy {
 
   images = [
     {
-      itemImageSrc: 'assets/services/carpenter.jpeg',
-      thumbnailImageSrc: 'assets/services/carpenter.jpeg',
+      itemImageSrc: 'assets/services/carpenter.jpg',
       description:
         'Browse and choose from a variety of local carpenters offering their woodworking and furniture services. Find the perfect carpenter for custom furniture, repairs, or installations in your area.',
       title: 'Carpenter',
     },
     {
-      itemImageSrc: 'assets/services/electrician.jpeg',
-      thumbnailImageSrc: 'assets/services/electrician.jpeg',
+      itemImageSrc: 'assets/services/electrician.jpg',
       description:
         'Discover skilled local electricians on our platform who are ready to assist with your electrical needs. From wiring to lighting, connect with professionals for electrical work in your town.',
       title: 'Electrician',
     },
     {
-      itemImageSrc: 'assets/services/gardening.jpeg',
-      thumbnailImageSrc: 'assets/services/gardening.jpeg',
+      itemImageSrc: 'assets/services/gardening.jpg',
       description:
         'Explore local gardening experts who can transform your outdoor spaces. From landscape design to lawn care, choose from professionals to make your garden flourish in your community.',
       title: 'Gardening',
     },
     {
-      itemImageSrc: 'assets/services/plumber.jpeg',
-      thumbnailImageSrc: 'assets/services/plumber.jpeg',
+      itemImageSrc: 'assets/services/plumber.jpg',
       description: `'Connect with local plumbers in your town to address plumbing issues promptly. Whether it's leaks, clogs, or installations, discover skilled professionals for your plumbing needs.`,
       title: 'Plumber',
     },
     {
-      itemImageSrc: 'assets/services/pest-control.jpeg',
-      thumbnailImageSrc: 'assets/services/pest-control.jpeg',
+      itemImageSrc: 'assets/services/pest-control.jpg',
       description:
         'Find local pest control experts on our platform who are dedicated to eliminating unwanted intruders from your home or business. Choose professionals from your town for effective pest control solutions.',
       title: 'Pest Control',
