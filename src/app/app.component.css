@@ -1,0 +1,23 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1050;
+  background-color: white;
+  width: 100vw;
+  box-shadow: 0 0 10px #000;
+}
+
+main {
+  width: 90vw;
+  margin: 70px 5vw;
+  position: relative;
+}
+
+@media screen and (max-width: 768px) {
+  main {
+    width: 100vw;
+    margin: 70px 0;
+    position: relative;
+  }
+}

@@ -1,0 +1,17 @@
+<div class="carousel">
+  <div class="image-container">
+    <img [src]="activeItem.itemImageSrc" alt="" />
+  </div>
+  <div class="image-info">
+    <h1>{{ activeItem.title }}</h1>
+    <p>{{ activeItem.description }}</p>
+  </div>
+  <div class="navigations">
+    <div class="navigate-right" (click)="navigateLeft()">
+      <i class="pi pi-angle-left" style="font-size: 4rem"></i>
+    </div>
+    <div class="navigate-left" (click)="navigateRight()">
+      <i class="pi pi-angle-right" style="font-size: 4rem"></i>
+    </div>
+  </div>
+</div>

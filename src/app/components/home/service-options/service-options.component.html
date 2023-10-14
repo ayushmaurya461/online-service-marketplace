@@ -1,0 +1,37 @@
+<div class="options">
+  <div class="option">
+    <p-card header="Discover Local Services">
+      <p>
+        Explore a wide range of services offered by local providers in your
+        town. Whether you need a plumber, electrician, carpenter, or any other
+        service, our platform connects you with skilled professionals. Browse
+        listings, read reviews, and find the perfect service provider for your
+        needs. Thousands of options are just a click away.
+      </p>
+      <ng-template pTemplate="footer">
+        <p-button label="Look for Services" icon="pi pi-search"></p-button>
+      </ng-template>
+    </p-card>
+  </div>
+  <div class="option">
+    <p-card
+      header="Join Our Service Provider Network"
+      [style]="{ width: '100%' }"
+    >
+      <p>
+        If you're a skilled service provider looking to expand your reach and
+        connect with clients in your town, you're in the right place. Create a
+        profile, showcase your expertise, and reach potential clients on our
+        platform. Join our community of service professionals and grow your
+        business with us.
+      </p>
+      <ng-template pTemplate="footer">
+        <p-button
+          [routerLink]="'/services'"
+          label="Become a Service Provider"
+          icon="pi pi-send"
+        ></p-button>
+      </ng-template>
+    </p-card>
+  </div>
+</div>

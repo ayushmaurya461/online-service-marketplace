@@ -1,1 +1,74 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~primeng/resources/primeng.min.css";
+@import "~primeng/resources/themes/saga-green/theme.css";
+@import "primeicons/primeicons.css";
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,500,300,700);
+
+* {
+  font-family: Open Sans;
+  margin: 0px;
+  padding: 0px;
+}
+
+.row {
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+*::-webkit-scrollbar {
+  width: 0px;
+}
+
+.font-weight-600 {
+  font-weight: 600;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.active-link {
+  color: rgb(5, 185, 5);
+}
+
+/* Card */
+.p-card {
+  box-shadow: none;
+}
+
+/* Carousel */
+
+ul.p-carousel-indicators.p-reset {
+  display: none;
+}
+
+/* DataView */
+
+/* Dropdown */
+.p-dropdown {
+  border-radius: 5px;
+  padding: 5px 2px 0px 16px;
+}
+
+/* InputText */
+.p-inputtext {
+  height: 30px;
+  padding: 0;
+}
+
+/* Buttons */
+p-dataViewLayoutOptions .p-button {
+  height: 30px;
+}
+
+/* Grid */
+
+/* Dialog */
+.p-dialog {
+  max-height: 100% !important;
+}
+
+.p-component-overlay {
+  background-color: rgba(0, 0, 0, 0.63);
+  transition-duration: 0.4s;
+}

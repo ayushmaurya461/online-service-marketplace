@@ -1,0 +1,14 @@
+.options {
+  display: flex !important;
+  flex-direction: row !important;
+  column-gap: 30px;
+  row-gap: 30px;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+
+.option {
+  min-width: 400px;
+  flex: 1 !important;
+  min-height: 280px;
+}

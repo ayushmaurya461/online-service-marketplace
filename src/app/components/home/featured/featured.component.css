@@ -1,0 +1,26 @@
+.featured {
+  background-color: rgba(255, 255, 255, 0.801);
+  padding: 10px;
+  margin: 2px;
+}
+
+.featured-image {
+  height: 100%;
+  width: 100%;
+  max-width: 250px;
+}
+
+.featured-heading {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none !important;
+  background-color: transparent;
+}
+
+.font-weight-bold {
+  font-weight: 700;
+}

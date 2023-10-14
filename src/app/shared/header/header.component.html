@@ -1,0 +1,90 @@
+<header>
+  <div class="logo"><p>Online Service Marketplace</p></div>
+  <div class="toggler" (click)="toggleNavigations()">
+    <i class="pi pi-bars" style="font-size: 1.6rem"></i>
+  </div>
+  <div class="mini-navigations hide">
+    <ul>
+      <li routerLink="/home" routerLinkActive="active" (click)="hideMenu()">
+        <h6>
+          <span> <i style="font-size: 2rem" class="pi pi-fw pi-home"></i></span
+          >Home
+        </h6>
+      </li>
+      <li routerLink="/services" routerLinkActive="active" (click)="hideMenu()">
+        <h6>
+          <span> <i style="font-size: 2rem" class="pi pi-fw pi-globe"></i></span
+          >Services
+        </h6>
+      </li>
+      <li routerLink="/about" routerLinkActive="active" (click)="hideMenu()">
+        <h6>
+          <span>
+            <i
+              style="font-size: 2rem"
+              class="pi pi-fw pi-exclamation-circle"
+            ></i></span
+          >About
+        </h6>
+      </li>
+      <li *ngIf="!isAuthenticated" (click)="showDialog()">
+        <h6>
+          <span> <i style="font-size: 2rem" class="pi pi-fw pi-user"></i></span
+          >Login/Signup
+        </h6>
+      </li>
+      <li
+        routerLink="/profile"
+        *ngIf="isAuthenticated"
+        routerLinkActive="active"
+        (click)="hideMenu()"
+      >
+        <h6>
+          <span> <i style="font-size: 2rem" class="pi pi-fw pi-user"></i></span
+          >Profile
+        </h6>
+      </li>
+    </ul>
+  </div>
+  <div class="navigations">
+    <ul>
+      <li routerLink="/home" routerLinkActive="active">
+        <h6>
+          <span> <i class="pi pi-fw pi-home"></i></span>Home
+        </h6>
+      </li>
+      <li routerLink="/services" routerLinkActive="active">
+        <h6>
+          <span> <i class="pi pi-fw pi-globe"></i></span>Services
+        </h6>
+      </li>
+      <li routerLink="/about" routerLinkActive="active">
+        <h6>
+          <span> <i class="pi pi-fw pi-exclamation-circle"></i></span>About
+        </h6>
+      </li>
+      <li *ngIf="!isAuthenticated" (click)="showDialog()">
+        <h6>
+          <span> <i class="pi pi-fw pi-user"></i></span>Login/Signup
+        </h6>
+      </li>
+      <li
+        routerLink="/profile"
+        *ngIf="isAuthenticated"
+        routerLinkActive="active"
+      >
+        <h6>
+          <span> <i class="pi pi-fw pi-user"></i></span>Profile
+        </h6>
+      </li>
+    </ul>
+  </div>
+</header>
+
+<p-dialog
+  [(visible)]="visible"
+  [modal]="true"
+  [style]="{ width: '100vw', height: '100vh' }"
+>
+  <user (loggedIn)="hideDialog()"></user>
+</p-dialog>

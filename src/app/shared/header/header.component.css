@@ -1,0 +1,98 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  height: 70px;
+  position: relative;
+}
+.logo p {
+  font-weight: 800;
+  padding: 5px;
+  color: green;
+  font-size: 1.4rem;
+}
+.navigations {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.navigations ul {
+  list-style: none;
+  display: flex;
+}
+
+.navigations li {
+  margin: 10px;
+  cursor: pointer;
+}
+
+.navigations ul > li > h6 {
+  font-weight: 700;
+}
+.navigations li > h6 > span {
+  font-weight: 700;
+  margin-right: 5px;
+}
+
+.mini-navigations {
+  position: fixed;
+  bottom: 0;
+  background-color: white;
+  width: 110vw;
+  height: calc(100vh - 70px);
+}
+
+.mini-navigations.hide {
+  transform: translateX(-120%);
+  transition: 0.5s;
+}
+.mini-navigations.show {
+  transform: translateX(-5%);
+  transition: 0.5s;
+}
+
+.mini-navigations ul {
+  list-style: none;
+  text-align: center;
+  margin-top: 20%;
+}
+
+.mini-navigations ul li {
+  margin: 20px;
+  padding: 10px 50px 0 0;
+  cursor: pointer;
+}
+
+.mini-navigations ul li h6 {
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+.mini-navigations ul li h6 span {
+  margin-right: 10px;
+  font-size: 2rem;
+}
+.toggler {
+  padding: 11px;
+  display: none;
+}
+
+.active {
+  color: green;
+}
+
+@media screen and (max-width: 768px) {
+  .navigations {
+    display: none;
+  }
+  header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 5px;
+    height: 70px;
+  }
+  .toggler {
+    padding: 11px;
+    display: block;
+  }
+}

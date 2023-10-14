@@ -1,0 +1,52 @@
+.carousel {
+  height: calc(100vh - 100px);
+  width: 100%;
+  position: relative;
+}
+
+.image-container {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+
+.image-info {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.514);
+  height: fit-content;
+  width: 100%;
+  min-height: 200px;
+  bottom: 0;
+  padding: 10px 20px;
+  font-weight: 700;
+}
+
+.image-info h1 {
+  font-weight: 700;
+  color: white;
+}
+.image-info p {
+  font-weight: 700;
+  color: white;
+}
+
+.navigations {
+  position: absolute;
+  top: 45%;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  /* background-color: black; */
+  height: 50px;
+}
+
+.navigations > .navigate-left,
+.navigations > .navigate-right {
+  color: white;
+  cursor: pointer;
+}

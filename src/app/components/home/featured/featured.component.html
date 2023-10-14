@@ -1,0 +1,39 @@
+<div class="featured">
+  <div>
+    <div class="card featured-heading">
+      <h2 class="font-weight-bold text-center">Featured {{ serviceName }}</h2>
+    </div>
+  </div>
+  <div>
+    <p-carousel
+      [value]="services"
+      [numVisible]="4"
+      [numScroll]="3"
+      [circular]="false"
+      [responsiveOptions]="responsiveOptions"
+    >
+      <ng-template let-product pTemplate="item">
+        <div class="card m-2 text-center py-5 px-3">
+          <div class="mb-3">
+            <img
+              [src]="product.images[0]"
+              [alt]="product.name"
+              class="featured-image"
+            />
+          </div>
+          <div>
+            <h4 class="mb-1">{{ product.name }}</h4>
+            <h6 class="mt-0 mb-3">
+              {{ product.overallRating }}
+              <i class="text-warning pi pi-star-fill"></i>
+            </h6>
+            <div class="d-flex justify-content-around">
+              <p-button type="button" icon="pi pi-id-card"></p-button>
+              <p-button type="button" icon="pi pi-bookmark-fill"></p-button>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </div>
+</div>
