@@ -1,5 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Galleria } from 'primeng/galleria';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-carousel',
@@ -9,6 +8,7 @@ import { Galleria } from 'primeng/galleria';
 export class CarouselComponent implements OnInit, OnDestroy {
   public activeItem: any;
   private count = 0;
+  private imageInterval: any;
 
   images = [
     {
@@ -44,7 +44,7 @@ export class CarouselComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.activeItem = this.images[0];
-    setInterval(() => {
+    this.imageInterval = setInterval(() => {
       this.count++;
       this.activeItem = this.images[this.count];
     }, 5000);
@@ -57,6 +57,7 @@ export class CarouselComponent implements OnInit, OnDestroy {
       this.count = this.count - 1;
     }
     this.activeItem = this.images[this.count];
+    clearInterval(this.imageInterval);
   }
 
   navigateRight() {
@@ -66,6 +67,7 @@ export class CarouselComponent implements OnInit, OnDestroy {
       this.count = this.count + 1;
     }
     this.activeItem = this.images[this.count];
+    clearInterval(this.imageInterval);
   }
 
   ngOnDestroy(): void {}

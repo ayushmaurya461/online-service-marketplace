@@ -32,9 +32,9 @@ export class UserComponent {
     let userSubscription: Subscription;
 
     if (form.valid) {
-      if (!this.login) {
+      if (this.login) {
         userSubscription = this.authService
-          .signup(this.name, this.email, this.password)
+          .login(this.email, this.password)
           .subscribe({
             next: (res) => {
               this.router.navigate(['/home']);
@@ -46,7 +46,7 @@ export class UserComponent {
           });
       } else {
         userSubscription = this.authService
-          .login(this.email, this.password)
+          .signup(this.name, this.email, this.password)
           .subscribe({
             next: (res) => {
               this.router.navigate(['/home']);

@@ -72,3 +72,23 @@ p-dataViewLayoutOptions .p-button {
   background-color: rgba(0, 0, 0, 0.63);
   transition-duration: 0.4s;
 }
+
+.login .p-dialog {
+  background: #000000e1;
+  color: #495057;
+  padding: 0 1.5rem 2rem 1.5rem;
+}
+.login .p-dialog .p-dialog-content {
+  background: transparent;
+  color: #495057;
+  padding: 0 1.5rem 2rem 1.5rem;
+}
+
+.login .p-dialog .p-dialog-header {
+  border-bottom: 0 none;
+  background: transparent;
+  color: #495057;
+  padding: 1.5rem;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}

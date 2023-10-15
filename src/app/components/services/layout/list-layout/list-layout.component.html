@@ -20,7 +20,12 @@
         [cancel]="false"
       ></p-rating>
       <h5>&#x20B9;{{ service.priceRange }}</h5>
-      <button class="btn btn-success">See Full Details</button>
+      <button
+        class="btn btn-success"
+        (click)="navigateToFullDetails(service.id)"
+      >
+        See Full Details
+      </button>
     </div>
   </div>
 </div>

@@ -9,7 +9,7 @@ export class ElectricianService {
     {
       id: 2,
       name: 'Eco Electric Solutions',
-      images: ['assets/featured/electric.jpeg'],
+      images: ['assets/services/electrician.jpg'],
       description: 'Your trusted electrician for all electrical needs.',
       contact: {
         mobile: '987-654-3210',
@@ -71,11 +71,27 @@ export class ElectricianService {
       insurance: true,
       portfolio: [
         {
-          imageUrl: 'https://www.ecoelectricsolutions.com/images/project1.jpg',
+          imageUrl: 'assets/featured/electric.jpeg',
           description: 'Electrical Panel Upgrade',
         },
         {
-          imageUrl: 'https://www.ecoelectricsolutions.com/images/project2.jpg',
+          imageUrl: 'assets/featured/electric.jpeg',
+          description: 'Electrical Panel Upgrade',
+        },
+        {
+          imageUrl: 'assets/featured/electric.jpeg',
+          description: 'Electrical Panel Upgrade',
+        },
+        {
+          imageUrl: 'assets/featured/electric.jpeg',
+          description: 'Electrical Panel Upgrade',
+        },
+        {
+          imageUrl: 'assets/featured/electric.jpeg',
+          description: 'Electrical Panel Upgrade',
+        },
+        {
+          imageUrl: 'assets/featured/electric.jpeg',
           description: 'LED Lighting Installation',
         },
       ],

@@ -1,5 +1,5 @@
 <header>
-  <div class="logo"><p>Online Service Marketplace</p></div>
+  <div class="logo"><p>OSM Bazaar</p></div>
   <div class="toggler" (click)="toggleNavigations()">
     <i class="pi pi-bars" style="font-size: 1.6rem"></i>
   </div>
@@ -81,10 +81,12 @@
   </div>
 </header>
 
-<p-dialog
-  [(visible)]="visible"
-  [modal]="true"
-  [style]="{ width: '100vw', height: '100vh' }"
->
-  <user (loggedIn)="hideDialog()"></user>
-</p-dialog>
+<div class="login">
+  <p-dialog
+    [(visible)]="visible"
+    [modal]="true"
+    [style]="{ width: '100vw', height: '100vh' }"
+  >
+    <user (loggedIn)="hideDialog()"></user>
+  </p-dialog>
+</div>

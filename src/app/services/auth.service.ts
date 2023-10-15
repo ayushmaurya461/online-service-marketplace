@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class AuthService {
   private baseUrl = environment.baseUrl;
   public user = new BehaviorSubject<User | null>(null);
+  public userType = 0;
   public isAuthenticated = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -19,7 +20,20 @@ export class AuthService {
       email: email,
       password: password,
     };
-    return this.http.post(this.baseUrl + 'user/signup', body);
+    return this.http.post(this.baseUrl + 'user/signup', body).pipe(
+      tap((response: any) => {
+        const newUser = new User(
+          email,
+          response.name,
+          response.token,
+          response.id,
+          response.userType
+        );
+        this.user.next(newUser);
+        this.userType = newUser.userType;
+        localStorage.setItem('userData', JSON.stringify(newUser));
+      })
+    );
   }
 
   autoLogin() {
@@ -32,13 +46,15 @@ export class AuthService {
         name: string;
         id: string;
         token: string;
+        userType: number;
       } = JSON.parse(userData);
 
       const user = new User(
         loadedData.email,
         loadedData.name,
         loadedData.token,
-        loadedData.id
+        loadedData.id,
+        loadedData.userType
       );
 
       const headers = new HttpHeaders({
@@ -76,9 +92,11 @@ export class AuthService {
           email,
           response.name,
           response.token,
-          response.id
+          response.id,
+          response.userType
         );
         this.user.next(newUser);
+        this.userType = newUser.userType;
         localStorage.setItem('userData', JSON.stringify(newUser));
       })
     );
