@@ -12,9 +12,10 @@
   min-width: 350px;
   max-width: 300px;
   display: flex;
-  padding: 10px 0;
+  padding: 30px 0;
   flex-direction: column;
-  border: 2px solid #c1c1c1;
+  border: 2px solid #efefef;
+  border-radius: 5px;
 }
 .image {
   flex: 1;
@@ -23,19 +24,26 @@
 }
 .image img {
   height: 100%;
+  border-radius: 5px;
   width: 100%;
   object-fit: contain;
 }
 .details {
-  padding: 20px;
   text-align: center;
   flex: 1;
   width: auto;
+  margin: 5px;
   column-gap: 20px;
 }
 .pricing {
   text-align: center;
   width: auto;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+.pricing > div {
+  padding: 0 20px;
 }
 @media screen and (max-width: 768px) {
   .service {
@@ -52,4 +60,27 @@
     width: auto;
     padding: 0 20px;
   }
+}
+
+p-rating {
+  display: flex !important;
+  justify-content: center !important;
+  width: fit-content;
+}
+p {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+button {
+  width: 90%;
+  margin: 10px auto;
+  border: none;
+  padding: 5px;
+  background-color: rgb(2, 150, 2);
+  border-radius: 5px;
+  color: white;
+}
+button:hover {
+  background-color: rgb(2, 163, 2);
 }

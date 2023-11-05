@@ -31,8 +31,8 @@
   position: absolute;
   background-color: rgb(0, 0, 0);
   z-index: 10;
-  bottom: -125px;
-  left: calc(50% - 125px);
+  bottom: -25px;
+  left: 5%;
   overflow: hidden;
   margin: auto;
   border-radius: 50%;
@@ -44,8 +44,79 @@
 }
 
 .profile > .profile-introduction {
-  background-color: red;
   height: 200px;
   width: 100%;
-  margin-top: 150px;
+  margin-top: 50px;
+  padding: 0 40px;
+  display: flex;
+  position: relative;
+}
+
+.intro {
+  min-width: 400px;
+  position: relative;
+}
+
+h5 {
+  font-weight: 700;
+}
+p {
+  margin-bottom: 0px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.toggle-to-service-provider {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.toggle-to-service-provider p {
+  font-weight: 600;
+}
+.intro button {
+  width: 40px;
+  padding: 10px 20px;
+  height: fit-content;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  right: 10px;
+}
+.intro button:hover {
+  background-color: rgb(197, 197, 197);
+}
+
+@media screen and (max-width: 768px) {
+  .profile .profile-image {
+    left: calc(50% - 125px);
+    bottom: -25px;
+  }
+  .intro {
+    width: 100%;
+    padding: 0 30px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .profile > .profile-introduction {
+    padding: 0;
+    height: 240px;
+    flex-direction: column-reverse;
+  }
+  .toggle-to-service-provider {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+    border-top: 2px solid rgb(223, 223, 223);
+  }
+  .toggle-to-service-provider p {
+    width: fit-content;
+    text-align: center;
+  }
 }

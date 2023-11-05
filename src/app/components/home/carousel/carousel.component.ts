@@ -45,7 +45,11 @@ export class CarouselComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.activeItem = this.images[0];
     this.imageInterval = setInterval(() => {
-      this.count++;
+      if (this.count < 4) {
+        this.count++;
+      } else {
+        this.count = 0;
+      }
       this.activeItem = this.images[this.count];
     }, 5000);
   }
@@ -61,7 +65,7 @@ export class CarouselComponent implements OnInit, OnDestroy {
   }
 
   navigateRight() {
-    if (this.count == 5) {
+    if (this.count > 3) {
       this.count = 0;
     } else {
       this.count = this.count + 1;
@@ -70,5 +74,7 @@ export class CarouselComponent implements OnInit, OnDestroy {
     clearInterval(this.imageInterval);
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    clearInterval(this.imageInterval);
+  }
 }

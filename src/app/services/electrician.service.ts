@@ -46,25 +46,6 @@ export class ElectricianService {
           currency: 'USD',
         },
       ],
-      availability: [
-        {
-          dayOfWeek: 'Monday',
-          availableTimes: ['8:00 AM - 12:00 PM', '2:00 PM - 5:00 PM'],
-        },
-        {
-          dayOfWeek: 'Tuesday',
-          availableTimes: ['8:00 AM - 12:00 PM', '2:00 PM - 5:00 PM'],
-        },
-        { dayOfWeek: 'Wednesday', availableTimes: ['8:00 AM - 12:00 PM'] },
-        {
-          dayOfWeek: 'Thursday',
-          availableTimes: ['8:00 AM - 12:00 PM', '2:00 PM - 5:00 PM'],
-        },
-        {
-          dayOfWeek: 'Friday',
-          availableTimes: ['8:00 AM - 12:00 PM', '2:00 PM - 5:00 PM'],
-        },
-      ],
       licensesAndCertifications: [
         { name: 'Licensed Electrician', issuingAuthority: 'Electrical Board' },
       ],
@@ -128,10 +109,6 @@ export class ElectricianService {
           reviewDate: new Date('2023-09-22'),
         },
       ],
-      termsAndConditions:
-        'Please read our terms and conditions on our website.',
-      cancellationPolicy:
-        'Cancellations must be made at least 24 hours in advance.',
       customerSupportContact: {
         mobile: '987-654-0000',
         email: 'support@ecoelectricsolutions.com',

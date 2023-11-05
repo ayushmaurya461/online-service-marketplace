@@ -12,6 +12,10 @@ import { RatingModule } from 'primeng/rating';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { DialogModule } from 'primeng/dialog';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
+import { ChipsModule } from 'primeng/chips';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,6 +35,9 @@ import { UserComponent } from './shared/user/user.component';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ServiceFullDetailsComponent } from './components/service-full-details/service-full-details.component';
+import { ServiceProfileComponent } from './components/profile/service-profile/service-profile.component';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { EditServiceProfileComponent } from './components/profile/edit-service-profile/edit-service-profile.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +55,8 @@ import { ServiceFullDetailsComponent } from './components/service-full-details/s
     UserComponent,
     ProfileComponent,
     ServiceFullDetailsComponent,
+    ServiceProfileComponent,
+    EditServiceProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,6 +75,10 @@ import { ServiceFullDetailsComponent } from './components/service-full-details/s
     DropdownModule,
     InputTextModule,
     DialogModule,
+    ConfirmDialogModule,
+    ToastModule,
+    ChipsModule,
+    MultiSelectModule,
   ],
   providers: [
     DataViewLayoutOptions,
@@ -74,6 +87,8 @@ import { ServiceFullDetailsComponent } from './components/service-full-details/s
       useClass: AuthInterceptorService,
       multi: true,
     },
+    ConfirmationService,
+    MessageService,
   ],
   bootstrap: [AppComponent],
 })

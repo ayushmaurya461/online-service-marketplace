@@ -21,4 +21,12 @@ export class HttpService {
     };
     return this.http.post<any>(this.apiUrl, body);
   }
+
+  updateUserDetails(patchData: any) {
+    return this.http.patch(this.apiUrl + 'user/update-user', patchData);
+  }
+
+  updateUserType(patchData: any) {
+    return this.http.patch(this.apiUrl + 'user/change-user-type', patchData);
+  }
 }

@@ -11,7 +11,6 @@
       <h5>
         <i class="pi pi-phone">{{ "  " + service.contact }}</i>
       </h5>
-      <p>{{ service.description }}</p>
     </div>
     <div class="pricing">
       <p-rating
@@ -20,10 +19,7 @@
         [cancel]="false"
       ></p-rating>
       <h5>&#x20B9;{{ service.priceRange }}</h5>
-      <button
-        class="btn btn-success"
-        (click)="navigateToFullDetails(service.id)"
-      >
+      <button (click)="navigateToFullDetails(service.id)">
         See Full Details
       </button>
     </div>

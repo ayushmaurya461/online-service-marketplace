@@ -1,10 +1,10 @@
 <div class="carousel">
   <div class="image-container">
-    <img [src]="activeItem.itemImageSrc" alt="" />
+    <img [src]="activeItem?.itemImageSrc" alt="" />
   </div>
   <div class="image-info">
-    <h1>{{ activeItem.title }}</h1>
-    <p>{{ activeItem.description }}</p>
+    <h1>{{ activeItem?.title }}</h1>
+    <p>{{ activeItem?.description }}</p>
   </div>
   <div class="navigations">
     <div class="navigate-right" (click)="navigateLeft()">

@@ -4,25 +4,21 @@
       <img [src]="service.images[0]" alt="{{ service.name }}" />
     </div>
     <div class="details">
-      <h3>
-        {{ service.name | titlecase }} <i class="pi pi-verified"></i><br />
-      </h3>
-      <h6><i class="pi pi-tag"></i> &nbsp;{{ service.tags }}</h6>
       <h5>
-        <i class="pi pi-phone">{{ "  " + service.contact }}</i>
+        {{ service.name | titlecase }} <i class="pi pi-verified"></i><br />
       </h5>
+      <p><i class="pi pi-tag"></i> &nbsp;{{ service.tags }}</p>
     </div>
     <div class="pricing">
-      <p-rating
-        [(ngModel)]="service.overallRating"
-        [readonly]="true"
-        [cancel]="false"
-      ></p-rating>
-      <h5>&#x20B9;{{ service.priceRange }}</h5>
-      <button
-        class="btn btn-success"
-        (click)="navigateToFullDetails(service.id)"
-      >
+      <div class="row d-flex justify-content-between">
+        <p style="width: fit-content">&#x20B9;{{ service.priceRange }}</p>
+        <p-rating
+          [(ngModel)]="service.overallRating"
+          [readonly]="true"
+          [cancel]="false"
+        ></p-rating>
+      </div>
+      <button (click)="navigateToFullDetails(service.id)">
         See Full Details
       </button>
     </div>

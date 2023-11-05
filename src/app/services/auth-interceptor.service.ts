@@ -15,12 +15,9 @@ export class AuthInterceptorService {
     return this.authService.user.pipe(
       take(1),
       exhaustMap((user: any) => {
-        // Check if a user is authenticated and has a token
         if (!user || !user.token) {
-          return next.handle(req); // If no token, continue without modification
+          return next.handle(req);
         }
-
-        // Clone the request and add the Authorization header with the token
         const modifiedReq = req.clone({
           setHeaders: {
             Authorization: `Bearer ${user.token}`,

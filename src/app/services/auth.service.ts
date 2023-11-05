@@ -35,50 +35,39 @@ export class AuthService {
       })
     );
   }
-
   autoLogin() {
     const userData = localStorage.getItem('userData');
     if (!userData) {
       return;
-    } else {
-      const loadedData: {
-        email: string;
-        name: string;
-        id: string;
-        token: string;
-        userType: number;
-      } = JSON.parse(userData);
-
-      const user = new User(
-        loadedData.email,
-        loadedData.name,
-        loadedData.token,
-        loadedData.id,
-        loadedData.userType
-      );
-
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + loadedData.token,
-      });
-
-      this.http
-        .post(this.baseUrl + 'user/validate', {}, { headers: headers })
-        .subscribe(
-          (res: any) => {
-            if (res.token_verified) {
-              this.isAuthenticated.next(true);
-              this.user.next(user);
-            } else {
-              this.logout();
-              this.router.navigate(['home']);
-            }
-          },
-          (err) => {
-            this.router.navigate(['home']);
-          }
-        );
     }
+
+    const loadedData = JSON.parse(userData);
+    const { email, name, id, token, userType } = loadedData;
+
+    const user = new User(email, name, token, id, userType);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    });
+
+    this.http.post(this.baseUrl + 'user/validate', {}, { headers }).subscribe({
+      next: (res: any) => {
+        if (res.token_verified) {
+          this.isAuthenticated.next(true);
+          this.user.next(user);
+        } else {
+          this.logoutAndRedirect();
+        }
+      },
+      error: (err) => {
+        this.logoutAndRedirect();
+      },
+    });
+  }
+
+  logoutAndRedirect() {
+    this.logout();
+    this.router.navigate(['home']);
   }
 
   login(email: string, password: string) {

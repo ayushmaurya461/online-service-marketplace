@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/api';
 import { CarpenterService } from 'src/app/services/carpenter.service';
 import { ServiceProvider } from 'src/app/shared/model/service.model';
@@ -17,6 +17,10 @@ export class LayoutComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
+    if (window.innerWidth < 769) {
+      this.layout = 'grid';
+    }
+
     this.sortOptions = [
       { name: 'Price, Low to High', code: 'LH' },
       { name: 'Price, High to Low', code: 'HL' },
