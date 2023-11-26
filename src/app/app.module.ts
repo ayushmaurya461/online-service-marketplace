@@ -28,7 +28,6 @@ import { FeaturedComponent } from './components/home/featured/featured.component
 import { ServiceOptionsComponent } from './components/home/service-options/service-options.component';
 import { FormsModule } from '@angular/forms';
 import { LayoutComponent } from './components/services/layout/layout.component';
-import { ListLayoutComponent } from './components/services/layout/list-layout/list-layout.component';
 import { GridLayoutComponent } from './components/services/layout/grid-layout/grid-layout.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { UserComponent } from './shared/user/user.component';
@@ -50,7 +49,6 @@ import { EditServiceProfileComponent } from './components/profile/edit-service-p
     FeaturedComponent,
     ServiceOptionsComponent,
     LayoutComponent,
-    ListLayoutComponent,
     GridLayoutComponent,
     UserComponent,
     ProfileComponent,

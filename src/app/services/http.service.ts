@@ -22,11 +22,38 @@ export class HttpService {
     return this.http.post<any>(this.apiUrl, body);
   }
 
+  getUserDetails(id: any) {
+    return this.http.post(this.apiUrl + 'user/get', { id: id });
+  }
+
+  updateUserProfileImage(body: any) {
+    const data = new FormData();
+    data.append('id', body.id);
+    data.append('file', body.file);
+    return this.http.post(this.apiUrl + 'user/update-profile', data);
+  }
+
   updateUserDetails(patchData: any) {
-    return this.http.patch(this.apiUrl + 'user/update-user', patchData);
+    return this.http.post(this.apiUrl + 'user/update', patchData);
   }
 
   updateUserType(patchData: any) {
     return this.http.patch(this.apiUrl + 'user/change-user-type', patchData);
+  }
+
+  updateServiceInUser(body: any) {
+    return this.http.post(this.apiUrl + 'user/update-service', body);
+  }
+
+  getServiceDetails(id: any) {
+    return this.http.post(this.apiUrl + 'services/get', { id: id });
+  }
+
+  getAllServices() {
+    return this.http.get(this.apiUrl + 'services');
+  }
+
+  postService(data: any) {
+    return this.http.post(this.apiUrl + 'services', data);
   }
 }

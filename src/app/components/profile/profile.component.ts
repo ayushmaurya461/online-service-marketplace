@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   ConfirmEventType,
   ConfirmationService,
@@ -7,6 +8,7 @@ import {
 import { AuthService } from 'src/app/services/auth.service';
 import { HttpService } from 'src/app/services/http.service';
 import { User } from 'src/app/shared/user/user';
+import { environment } from 'src/environment/base';
 
 @Component({
   selector: 'app-profile',
@@ -20,23 +22,37 @@ export class ProfileComponent implements OnInit {
   user: any;
   dialogWidth = '';
   userType = false;
+  editingStarted = false;
   activeUserType = false;
+  baseUrl: string = '';
+  newUserDetails: any;
 
   constructor(
     private authService: AuthService,
     public messageService: MessageService,
     private http: HttpService,
-    public confirmService: ConfirmationService
+    public confirmService: ConfirmationService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.checkDialogWidth();
     this.authService.user.subscribe((res: any) => {
-      this.user = res;
-      if (this.user) {
-        this.activeUserType = this.userType = res.userType ? true : false;
-      }
+      if (res?.id)
+        this.http.getUserDetails(res.id).subscribe((res: any) => {
+          this.user = res;
+          this.userType = res.userType;
+
+          this.newUserDetails = {
+            email: res?.email ?? '',
+            mobile: res?.mobile ?? '',
+            city: res?.city ?? '',
+            state: res?.state ?? '',
+            address: res?.address ?? '',
+          };
+        });
     });
+    this.baseUrl = environment.baseUrl;
   }
 
   changeUserType() {
@@ -104,8 +120,53 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  naviagteToEditProfile(id: any) {
+    if (!id) {
+      id = 0;
+    }
+    this.router.navigate(['edit-service-profile/' + id]);
+  }
+
   logout() {
     this.authService.logout();
+  }
+
+  startEditing() {
+    this.editingStarted = true;
+  }
+  saveEdited() {
+    this.http
+      .updateUserDetails({ id: this.user?.id, user: this.newUserDetails })
+      .subscribe((res: any) => {
+        this.editingStarted = false;
+        this.user = res.user;
+        this.newUserDetails = this.user;
+      });
+  }
+
+  cancelEditing() {
+    this.editingStarted = false;
+    this.newUserDetails = {
+      email: this.user?.email ?? '',
+      mobile: this.user?.mobile ?? '',
+      city: this.user?.city ?? '',
+      state: this.user?.state ?? '',
+      addresss: this.user?.address ?? '',
+    };
+  }
+
+  triggerupdateProfile() {
+    (document.querySelector('#file') as HTMLInputElement).click();
+  }
+  onFileSelected(evnt: any) {
+    const file = evnt.target.files[0];
+    if (file) {
+      this.http
+        .updateUserProfileImage({ id: this.user?.id, file: file })
+        .subscribe((res: any) => {
+          this.user.image = res.image;
+        });
+    }
   }
 
   checkDialogWidth() {

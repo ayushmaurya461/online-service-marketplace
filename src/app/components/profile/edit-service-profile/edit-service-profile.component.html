@@ -1,4 +1,14 @@
 <div class="container pt-4">
+  <h3>Service Profile</h3>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="profile">
+        <img [src]="base + fields.image" alt="" />
+      </div>
+    </div>
+    <div class="col-md-6"></div>
+  </div>
+
   <form class="service-details" #serviceDetails="ngForm">
     <div class="row">
       <div class="col-md-6">
@@ -43,7 +53,7 @@
         <div class="form-group">
           <label for="mobile">Mobile</label>
           <input
-            type="number"
+            type="text"
             name="mobile"
             id="mobile"
             [(ngModel)]="fields.contact.mobile"

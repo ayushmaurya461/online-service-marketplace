@@ -3,13 +3,30 @@
     <img [src]="'assets/profile/cover2.jpeg'" alt="Background" />
     <button class="btn btn-danger" (click)="logout()">Logout</button>
     <div class="profile-image">
-      <img [src]="'assets/profile/profile.jpeg'" alt="" />
+      <input
+        type="file"
+        name="file"
+        (change)="onFileSelected($event)"
+        id="file"
+        hidden
+      />
+      <img
+        [src]="baseUrl + user?.image"
+        (click)="triggerupdateProfile()"
+        alt=""
+      />
     </div>
   </div>
   <div class="profile-introduction">
     <div class="toggle-to-service-provider">
+      <button
+        class="btn btn-success"
+        (click)="naviagteToEditProfile(user?.service ?? 0)"
+      >
+        Edit Service Profile
+      </button>
       <p class="mb-2">
-        Become a <span *ngIf="user?.userTye">Normal User</span>
+        Become a <span *ngIf="user?.userType">Normal User</span>
         <span *ngIf="!user?.userType">Service Provider</span>
       </p>
       <label class="switch">
@@ -20,15 +37,89 @@
         />
         <span class="slider round"></span>
       </label>
+      <p>
+        {{ userType ? "Active" : "Deactive" }}
+      </p>
     </div>
-    <div class="intro">
-      <button><i class="pi pi-pencil"></i></button>
+    <div class="intro" *ngIf="!editingStarted">
+      <button (click)="startEditing()"><i class="pi pi-pencil"></i></button>
       <h5>Ayush Maurya</h5>
-      <p><span class="p-blue">Email : </span>{{ "email@email.com" }}</p>
-      <p><span class="p-blue">Mobile : </span>{{ "8641548143" }}</p>
-      <p><span class="p-blue">City : </span>{{ "Yamunanagar" }}</p>
-      <p><span class="p-blue">State : </span>{{ "Haryana" }}</p>
-      <p><span class="p-blue">Address : </span>{{ "105, Model Town" }}</p>
+      <p>
+        <span class="p-blue">Email : </span>{{ user?.email ?? "Not Available" }}
+      </p>
+      <p>
+        <span class="p-blue">Mobile : </span
+        >{{ user?.mobile ?? "Not Available" }}
+      </p>
+      <p>
+        <span class="p-blue">City : </span>{{ user?.city ?? "Not Available" }}
+      </p>
+      <p>
+        <span class="p-blue">State : </span>{{ user?.state ?? "Not Available" }}
+      </p>
+      <p>
+        <span class="p-blue">Address : </span
+        >{{ user?.address ?? "Not Available" }}
+      </p>
+    </div>
+    <div class="intro" *ngIf="editingStarted">
+      <div class="btn-row">
+        <button (click)="saveEdited()"><i class="pi pi-check"></i></button>
+        <button (click)="cancelEditing()"><i class="pi pi-times"></i></button>
+      </div>
+      <h5>Ayush Maurya</h5>
+      <div class="form">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="text"
+            name="email"
+            id="email"
+            class="form-control"
+            [(ngModel)]="newUserDetails.email"
+          />
+        </div>
+        <div class="form-group">
+          <label for="mobile">Mobile</label>
+          <input
+            type="text"
+            name="mobile"
+            id="mobile"
+            class="form-control"
+            [(ngModel)]="newUserDetails.mobile"
+          />
+        </div>
+        <div class="form-group">
+          <label for="city">City</label>
+          <input
+            type="text"
+            name="city"
+            id="city"
+            class="form-control"
+            [(ngModel)]="newUserDetails.city"
+          />
+        </div>
+        <div class="form-group">
+          <label for="state">State</label>
+          <input
+            type="text"
+            name="state"
+            id="state"
+            class="form-control"
+            [(ngModel)]="newUserDetails.state"
+          />
+        </div>
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input
+            type="text"
+            name="address"
+            id="address"
+            class="form-control"
+            [(ngModel)]="newUserDetails.address"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </div>

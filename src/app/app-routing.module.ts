@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'services', component: ServicesComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'service/:id', component: ServiceFullDetailsComponent },
-  { path: 'edit-service-profile', component: EditServiceProfileComponent },
+  { path: 'edit-service-profile/:id', component: EditServiceProfileComponent },
 ];
 
 @NgModule({

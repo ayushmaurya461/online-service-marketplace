@@ -6,6 +6,8 @@ import {
   MessageService,
 } from 'primeng/api';
 import { AuthService } from 'src/app/services/auth.service';
+import { environment } from 'src/environment/base';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-service-profile',
@@ -14,14 +16,17 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class EditServiceProfileComponent implements OnInit {
   private user: any;
+  public base: any;
+  serviceId: any;
+
   fields = {
-    id: '',
+    id: 0,
     serviceName: '',
     name: '',
     image: '',
     description: '',
     contact: {
-      mobile: '',
+      mobile: null,
       email: '',
       website: '',
       socialMediaLinks: [
@@ -77,23 +82,47 @@ export class EditServiceProfileComponent implements OnInit {
     private authService: AuthService,
     public messageService: MessageService,
     private http: HttpService,
+    private route: Router,
     public confirmService: ConfirmationService
-  ) {}
-
-  ngOnInit(): void {
+  ) {
+    this.serviceId = this.route.url.split('/')[2];
+    this.base = environment.baseUrl;
     this.authService.user.subscribe((res: any) => {
       this.user = res;
     });
   }
 
+  ngOnInit(): void {
+    if (this.serviceId != '0') {
+      this.http.getServiceDetails(this.serviceId).subscribe({
+        next: (res: any) => {
+          this.fields = res.service;
+        },
+        error: (error) => {
+          console.error(error);
+        },
+      });
+    }
+  }
+
   saveDetails() {
     const patchData = {
-      id: this.user.id,
+      id: this.serviceId,
       service: this.fields,
     };
-    this.http.updateUserDetails(patchData).subscribe({
-      next: (res) => {
-        console.log(res);
+    this.http.postService(patchData).subscribe({
+      next: (res: any) => {
+        this.serviceId = res.id;
+        this.http
+          .updateServiceInUser({ id: this.user.id, service: res.id })
+          .subscribe({
+            next: (saved) => {
+              console.log(saved);
+            },
+            error: (err) => {
+              console.log('Something went wrong');
+            },
+          });
       },
       error: (err) => {
         console.log(err);

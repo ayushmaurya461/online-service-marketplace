@@ -3,39 +3,23 @@
   display: flex;
   height: fit-content;
   flex-direction: row;
-  padding: 10px;
-}
-.view-toggle {
-  margin-left: auto;
-  border: 1px solid black;
-  border-radius: 5px;
-  overflow: hidden;
-  height: fit-content;
-}
-.view-toggle button {
-  border: none;
-  height: 30px;
-  width: 35px;
-  background-color: beige;
-  flex: 1;
-  transition: 0.3s;
-}
-.view-toggle button:hover,
-.view-toggle button:focus {
-  outline: none;
-  border: none;
-}
-.view-toggle button.active {
-  background-color: rgb(0, 94, 0);
-  color: white;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 5%;
+  margin: 20px 0;
+  background-color: rgb(233, 233, 233);
 }
 .filters {
   height: fit-content;
   width: fit-content;
+  display: flex;
+  column-gap: 20px;
+  justify-content: flex-end;
 }
-
-@media screen and (max-width: 768px) {
-  .view-toggle {
-    display: none;
-  }
+h3 {
+  font-weight: 800;
+  color: green;
+}
+.layout {
+  padding: 10px 0;
 }

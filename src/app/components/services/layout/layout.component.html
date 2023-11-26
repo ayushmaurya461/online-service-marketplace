@@ -1,27 +1,16 @@
-<div class="options">
-  <div class="filters">
-    <p-dropdown
-      [options]="sortOptions"
-      optionLabel="name"
-      [selectId]="'sort'"
-    ></p-dropdown>
-  </div>
-  <div class="view-toggle">
-    <button
-      (click)="toggleView('list')"
-      [ngClass]="layout === 'list' ? 'active' : ''"
-    >
-      <i class="pi pi-bars"></i>
-    </button>
-    <button
-      (click)="toggleView('grid')"
-      [ngClass]="layout === 'grid' ? 'active' : ''"
-    >
-      <i class="pi pi-th-large"></i>
-    </button>
-  </div>
-</div>
 <div class="layout">
-  <grid-layout *ngIf="layout === 'grid'"></grid-layout>
-  <list-layout *ngIf="layout === 'list'"></list-layout>
+  <div class="options">
+    <h3>Services</h3>
+    <div class="filters">
+      <input
+        type="text"
+        name=""
+        placeholder="Search"
+        class="form-control"
+        id=""
+      />
+      <button class="btn btn-success">Search</button>
+    </div>
+  </div>
+  <grid-layout></grid-layout>
 </div>
