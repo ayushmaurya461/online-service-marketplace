@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { Loader } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'user',
@@ -17,7 +18,11 @@ export class UserComponent {
   isAuthenticated = false;
   @Output() loggedIn: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private loader: Loader
+  ) {}
 
   submitCredentials() {}
 
@@ -32,6 +37,7 @@ export class UserComponent {
     let userSubscription: Subscription;
 
     if (form.valid) {
+      this.loader.show();
       if (this.login) {
         userSubscription = this.authService
           .login(this.email, this.password)
@@ -39,9 +45,11 @@ export class UserComponent {
             next: (res) => {
               this.router.navigate(['/home']);
               this.loggedIn.emit(true);
+              this.loader.hide();
             },
             error: (err) => {
               console.log(err);
+              this.loader.hide();
             },
           });
       } else {
@@ -51,9 +59,11 @@ export class UserComponent {
             next: (res) => {
               this.router.navigate(['/home']);
               this.loggedIn.emit(true);
+              this.loader.hide();
             },
             error: (err) => {
               console.log(err);
+              this.loader.hide();
             },
           });
       }

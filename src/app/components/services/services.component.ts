@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { ServiceProvider } from 'src/app/shared/model/service.model';
-import { DataViewLayoutOptions } from 'primeng/dataview';
 
 @Component({
   selector: 'app-services',
@@ -10,13 +8,5 @@ import { DataViewLayoutOptions } from 'primeng/dataview';
 export class ServicesComponent {
   layout: string = 'list';
 
-  products!: ServiceProvider[];
-
-  constructor() {}
-
-  ngOnInit() {
-    if (window.innerWidth < 768) {
-      this.layout = 'list';
-    }
-  }
+  ngOnInit() {}
 }

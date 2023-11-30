@@ -1,24 +1,27 @@
 <div class="services">
   <div class="service" *ngFor="let service of services">
     <div class="image">
-      <img [src]="service.images[0]" alt="{{ service.name }}" />
+      <img [src]="baseUrl + service.image" alt="{{ service.name }}" />
     </div>
     <div class="details">
       <h5>
         {{ service.name | titlecase }} <i class="pi pi-verified"></i><br />
       </h5>
-      <p><i class="pi pi-tag"></i> &nbsp;{{ service.tags }}</p>
+      <p>
+        <i class="pi pi-tag"></i> &nbsp;<span
+          *ngFor="let s of service.serviceCategories"
+        >
+          {{ s.name }} &nbsp;
+        </span>
+      </p>
     </div>
     <div class="pricing">
       <div class="row d-flex justify-content-between">
-        <p style="width: fit-content">&#x20B9;{{ service.priceRange }}</p>
-        <p-rating
-          [(ngModel)]="service.overallRating"
-          [readonly]="true"
-          [cancel]="false"
-        ></p-rating>
+        <p style="width: fit-content">
+          &#x20B9;{{ service.overallPriceRange }}
+        </p>
       </div>
-      <button (click)="navigateToFullDetails(service.id)">
+      <button (click)="navigateToFullDetails(service._id)">
         See Full Details
       </button>
     </div>

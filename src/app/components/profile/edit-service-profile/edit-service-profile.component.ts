@@ -8,6 +8,7 @@ import {
 import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environment/base';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { Loader } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-edit-service-profile',
@@ -61,11 +62,13 @@ export class EditServiceProfileComponent implements OnInit {
       { day: 'Saturday', start: '', end: '' },
       { day: 'Sunday', start: '', end: '' },
     ],
+    license: [{ name: '', issuedBy: '', date: '' }],
     pricing: [{ serviceName: '', startsAt: '', description: '' }],
     paymentMethods: [],
     guaranteess: [{ name: '', description: '' }],
     serviceArea: '',
-    tools: [],
+    faq: [{ que: '', ans: '' }],
+    tools: '',
     teamMembers: [{ name: '', role: '', mobile: '' }],
     overallPriceRange: '',
   };
@@ -83,7 +86,8 @@ export class EditServiceProfileComponent implements OnInit {
     public messageService: MessageService,
     private http: HttpService,
     private route: Router,
-    public confirmService: ConfirmationService
+    public confirmService: ConfirmationService,
+    private loader: Loader
   ) {
     this.serviceId = this.route.url.split('/')[2];
     this.base = environment.baseUrl;
@@ -94,15 +98,75 @@ export class EditServiceProfileComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.serviceId != '0') {
+      this.loader.show();
       this.http.getServiceDetails(this.serviceId).subscribe({
         next: (res: any) => {
+          this.loader.hide();
           this.fields = res.service;
+          console.log(this.fields);
         },
         error: (error) => {
+          this.loader.hide();
           console.error(error);
         },
       });
     }
+  }
+
+  triggerImageUpload() {
+    const dpElement = document.getElementById('dp') as HTMLInputElement;
+    dpElement.click();
+  }
+
+  onfileChange(evnt: any) {
+    this.loader.show();
+    const file = evnt.target.files[0];
+    if (file) {
+      this.http
+        .updateServiceProfileImage({ id: this.serviceId, file: file })
+        .subscribe({
+          next: (res: any) => {
+            this.loader.hide();
+            this.fields.image = res.image;
+          },
+          error: (err) => {
+            this.loader.hide();
+            console.error(err);
+          },
+        });
+    }
+  }
+
+  addMorePricing() {
+    this.fields.pricing.push({
+      serviceName: '',
+      startsAt: '',
+      description: '',
+    });
+  }
+
+  removeLastPricing() {
+    this.fields.pricing.pop();
+  }
+
+  addLicense() {
+    this.fields.license.push({
+      name: '',
+      issuedBy: '',
+      date: '',
+    });
+  }
+
+  removeLicense() {
+    this.fields.license.pop();
+  }
+
+  addMorefaq() {
+    this.fields.faq.push({ que: '', ans: '' });
+  }
+
+  removeLastfaq() {
+    this.fields.faq.pop();
   }
 
   saveDetails() {

@@ -1,50 +1,61 @@
 <div class="basic-details">
   <div class="image-container">
-    <img [src]="details.images[0]" alt="" />
+    <img [src]="baseUrl + details?.image" alt="" />
   </div>
   <div class="profile-details">
-    <h3>{{ details.name }}</h3>
+    <h3>{{ details?.serviceName }}</h3>
     <h6 class="font-weight-bold">
-      {{ details.description }}
+      {{ details?.description }}
     </h6>
     <p class="p-blue mb-0">Provider Name</p>
+    <p>{{ details?.name }}</p>
     <div class="price">
-      <p>Price Range : Rs. {{ details.priceRange }}</p>
-      <p>Rating : {{ details.overallRating }}</p>
+      <p class="font-weight-bold">
+        Price Range : Rs. {{ details?.overallPriceRange }}
+      </p>
     </div>
     <hr />
     <p>
-      <span>Mobile</span> :
-      {{ details.contact.mobile }} &nbsp;&nbsp;&nbsp;<span> Email</span> :
-      {{ details.contact.email }} &nbsp;&nbsp; &nbsp; <span>Website</span> :
-      {{ details.contact.website }}
+      <span>Mobile</span> : {{ details?.contact.mobile }} &nbsp;&nbsp;&nbsp;
+      <br />
+      <span>Email</span> : {{ details?.contact.email }} &nbsp;&nbsp; &nbsp;
+      <br />
+      <span>Website</span> :
+      {{ details?.contact.website }}
       <br />
       <span>Address</span> :
       {{
-        details.address.street +
+        details?.address.street +
           ", " +
-          details.address.city +
+          details?.address.city +
           ", " +
-          details.address.state +
+          details?.address.state +
           ". Pin code " +
-          details.address.postalCode
+          details?.address.postalCode
       }}
     </p>
+    <div class="row d-flex">
+      <div>
+        <p-rating
+          *ngIf="details?.overallRating"
+          [(ngModel)]="details.overallRating"
+          [readonly]="true"
+          [cancel]="false"
+        ></p-rating>
+      </div>
+    </div>
     <hr />
-    <div
-      class="liscense p-blue"
-      *ngFor="let liscence of details.licensesAndCertifications"
-    >
-      <p>{{ liscence.name }} by {{ liscence.issuingAuthority }}</p>
+    <div class="liscense p-blue" *ngFor="let liscence of details?.license">
+      <p>{{ liscence?.name }} by {{ liscence?.issuedBy }}</p>
     </div>
     <hr />
     <div class="availiablity">
-      <p class="p-blue">Areas : {{ details.serviceArea }}</p>
+      <p class="p-blue">Areas : {{ details?.serviceArea }}</p>
       <ul>
-        <li *ngFor="let av of details.availability">
-          <p class="p-blue">{{ av.dayOfWeek }}</p>
+        <li *ngFor="let av of details?.availability">
+          <p class="p-blue">{{ av?.dayOfWeek }}</p>
           - &nbsp;
-          <p>{{ av.availableTimes }}</p>
+          <p>{{ av?.availableTimes }}</p>
         </li>
       </ul>
     </div>
@@ -54,70 +65,12 @@
   <div>
     <h5>Pricing</h5>
     <div class="pricing">
-      <div class="card" *ngFor="let p of details.pricing">
-        <p class="p-blue">{{ p.serviceName }}</p>
-        <p>{{ p.price }} {{ p.currency }}</p>
-      </div>
-    </div>
-  </div>
-  <div>
-    <h5>Service Guarantees</h5>
-    <div class="service-guarantees">
-      <div class="card" *ngFor="let g of details.serviceGuarantees">
-        <p class="p-blue">{{ g.name }}</p>
-        <p>{{ g.description }}</p>
+      <div class="card" *ngFor="let p of details?.pricing">
+        <p class="p-blue">{{ p?.serviceName }}</p>
+        <p>{{ p?.price }} {{ p?.startsAt }}</p>
+        <p>{{ p?.description }}</p>
       </div>
     </div>
   </div>
 </div>
-<div class="details">
-  <h5 class="text-center mb-3">Portfolio</h5>
-  <div class="portfolio">
-    <div class="portfolio-details" *ngFor="let p of details.portfolio">
-      <div class="portfolio-image">
-        <img [src]="p.imageUrl" alt="portfolio" />
-      </div>
-      <div>
-        <p>{{ p.description }}</p>
-      </div>
-    </div>
-  </div>
-</div>
-<hr />
-<div class="other-details">
-  <div class="frequently-asked-questions">
-    <h5>Frequently Asked Questions</h5>
-    <li *ngFor="let qa of details.frequentlyAskedQuestions; let i = index">
-      <p class="p-blue">Q{{ i + 1 }}. &nbsp; {{ qa.question }}</p>
-      <p>{{ qa.answer }}</p>
-    </li>
-  </div>
-  <div class="reviews">
-    <div class="d-flex justify-content-between">
-      <h5>Reviews</h5>
-      <button class="btn btn-secondary">View All Reviews</button>
-    </div>
-    <li *ngFor="let reviews of details.reviews">
-      <div>
-        <p class="p-blue">{{ reviews.reviewerName }}</p>
-        <p>Rating : &nbsp;{{ reviews.rating }}</p>
-      </div>
-      <p>{{ reviews.reviewText }}</p>
-    </li>
-  </div>
-</div>
-<div class="terms-details">
-  <div class="terms">
-    <h6 class="p-blue">Terms And Conditions</h6>
-    <p>{{ details.termsAndConditions }}</p>
-    <p>{{ details.cancellationPolicy }}</p>
-    <p>
-      {{
-        details.customerSupportContact?.mobile +
-          ", " +
-          details.customerSupportContact?.email
-      }}
-    </p>
-  </div>
-</div>
-<hr />
+

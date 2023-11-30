@@ -56,4 +56,11 @@ export class HttpService {
   postService(data: any) {
     return this.http.post(this.apiUrl + 'services', data);
   }
+
+  updateServiceProfileImage(body: any) {
+    const data = new FormData();
+    data.append('id', body.id);
+    data.append('file', body.file);
+    return this.http.post(this.apiUrl + 'services/update-profile', data);
+  }
 }

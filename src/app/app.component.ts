@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
+import { Notification } from './services/notification.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,10 @@ import { AuthService } from './services/auth.service';
 export class AppComponent implements OnInit {
   title = 'OSM';
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    public notification: Notification
+  ) {}
 
   ngOnInit(): void {
     this.authService.autoLogin();

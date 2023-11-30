@@ -1,12 +1,27 @@
 <div class="container pt-4">
   <h3>Service Profile</h3>
+  <hr />
   <div class="row">
     <div class="col-md-6">
       <div class="profile">
-        <img [src]="base + fields.image" alt="" />
+        <input
+          type="file"
+          name="dp"
+          (change)="onfileChange($event)"
+          id="dp"
+          hidden
+        />
+        <h5 *ngIf="!fields.image">No image is added for the service</h5>
+        <img
+          *ngIf="fields.image"
+          [src]="base + fields.image"
+          alt="Unable to load image"
+        />
       </div>
+      <button class="btn btn-success" (click)="triggerImageUpload()">
+        Upload Image
+      </button>
     </div>
-    <div class="col-md-6"></div>
   </div>
 
   <form class="service-details" #serviceDetails="ngForm">
@@ -182,7 +197,7 @@
       <div class="col-md-2"><label>Starts At</label></div>
       <div class="col-md-7"><label>Description</label></div>
     </div>
-    <div class="row" *ngFor="let price of fields.pricing; let i = index">
+    <div class="row mb-2" *ngFor="let price of fields.pricing; let i = index">
       <div class="col-md-3">
         <input
           type="text"
@@ -214,6 +229,24 @@
         />
       </div>
     </div>
+    <div class="row">
+      <div class="col-md-5 mt-1">
+        <button
+          class="btn btn-success"
+          type="button"
+          (click)="addMorePricing()"
+        >
+          Add More
+        </button>
+        <button
+          class="btn btn-danger m-2"
+          type="button"
+          (click)="removeLastPricing()"
+        >
+          Remove Last
+        </button>
+      </div>
+    </div>
     <hr />
     <h5>Business Hours</h5>
     <table class="table table-borderless table-sm">
@@ -225,13 +258,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let bhours of fields.businessHours">
+        <tr *ngFor="let bhours of fields.businessHours; let i = index">
           <td class="d-flex align-items-center">{{ bhours.day }}</td>
           <td>
             <input
               type="text"
-              name="monday_start"
-              id="monday_start"
+              name="monday_start{{ i }}"
+              id="monday_start{{ i }}"
               placeholder=" Hrs:Mins"
               [(ngModel)]="bhours.start"
               class="form-control"
@@ -240,9 +273,9 @@
           <td>
             <input
               type="text"
-              name="monday_end"
+              name="monday_end{{ i }}"
               placeholder=" Hrs:Mins"
-              id="monday_end"
+              id="monday_end{{ i }}"
               [(ngModel)]="bhours.end"
               class="form-control"
             />
@@ -250,6 +283,87 @@
         </tr>
       </tbody>
     </table>
+    <hr />
+    <h5>Tools</h5>
+    <div class="row">
+      <div class="dol-md-12">
+        <textarea
+          name="tool"
+          class="form-control"
+          id="tool"
+          [(ngModel)]="fields.tools"
+        ></textarea>
+      </div>
+    </div>
+    <hr />
+    <h5>Payments Methods</h5>
+    <div class="row">
+      <div class="col-md-12">
+        <textarea
+          name="payment"
+          id="payment"
+          class="form-control"
+          [(ngModel)]="fields.paymentMethods"
+        ></textarea>
+      </div>
+    </div>
+    <hr />
+    <h5>License and Certifications</h5>
+    <div class="row">
+      <div class="col-md-3">
+        <label for="name">Name</label>
+      </div>
+      <div class="col-md-3">
+        <label for="date">Date</label>
+      </div>
+      <div class="col-md-3">
+        <label for="issued">Issued By</label>
+      </div>
+    </div>
+    <div class="row mb-2" *ngFor="let l of fields.license; let i = index">
+      <div class="col-md-3">
+        <input
+          type="text"
+          class="form-control"
+          name="{{ i + l.name }}"
+          id="{{ i + l.name }}"
+          [(ngModel)]="l.name"
+        />
+      </div>
+      <div class="col-md-3">
+        <input
+          type="text"
+          class="form-control"
+          name="{{ i + l.date }}"
+          id="{{ i + l.date }}"
+          [(ngModel)]="l.date"
+        />
+      </div>
+      <div class="col-md-3">
+        <input
+          type="text"
+          class="form-control"
+          name="{{ i + l.issuedBy }}"
+          id="{{ i + l.issuedBy }}"
+          [(ngModel)]="l.issuedBy"
+        />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-5">
+        <button class="btn btn-success" type="button" (click)="addLicense()">
+          Add More
+        </button>
+        <button
+          class="btn btn-danger m-2"
+          type="button"
+          (click)="removeLicense()"
+        >
+          Remove Last
+        </button>
+      </div>
+    </div>
     <hr />
     <h5>Social Media Links</h5>
     <div class="row">
@@ -265,12 +379,53 @@
             placeholder="{{ links.platform }} Link"
             id="{{ links.platform }}"
             class="form-control"
+            [(ngModel)]="links.url"
           />
         </div>
       </div>
     </div>
+    <hr />
+    <h5>Frequently Asked Questions</h5>
+    <div class="row">
+      <div class="col-md-6"><label for="que">Question</label></div>
+      <div class="col-md-6"><label for="ans">Answer</label></div>
+    </div>
+    <div class="row mb-3" *ngFor="let faq of fields.faq; let i = index">
+      <div class="col-md-6">
+        <textarea
+          name="{{ i }}que"
+          id="{{ i }}que"
+          rows="2"
+          [(ngModel)]="faq.que"
+          class="form-control"
+        ></textarea>
+      </div>
+      <div class="col-md-6">
+        <textarea
+          name="{{ i }}ans"
+          id="{{ i }}ans"
+          rows="2"
+          [(ngModel)]="faq.ans"
+          class="form-control"
+        ></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-5">
+        <button class="btn btn-success" type="button" (click)="addMorefaq()">
+          Add More
+        </button>
+        <button
+          class="btn btn-danger m-2"
+          type="button"
+          (click)="removeLastfaq()"
+        >
+          Remove Last
+        </button>
+      </div>
+    </div>
   </form>
-  <div class="row d-flex justify-content-end">
+  <div class="row d-flex justify-content-end mt-4">
     <div class="col-md-2 d-flex justify-content-end">
       <button class="btn btn-success" (click)="saveDetails()">Save</button>
     </div>

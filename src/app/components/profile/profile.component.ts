@@ -7,6 +7,8 @@ import {
 } from 'primeng/api';
 import { AuthService } from 'src/app/services/auth.service';
 import { HttpService } from 'src/app/services/http.service';
+import { Loader } from 'src/app/services/loader.service';
+import { Notification } from 'src/app/services/notification.service';
 import { User } from 'src/app/shared/user/user';
 import { environment } from 'src/environment/base';
 
@@ -32,17 +34,21 @@ export class ProfileComponent implements OnInit {
     public messageService: MessageService,
     private http: HttpService,
     public confirmService: ConfirmationService,
-    private router: Router
+    private router: Router,
+    private loader: Loader,
+    private notification: Notification
   ) {}
 
   ngOnInit(): void {
+    this.loader.show();
     this.checkDialogWidth();
     this.authService.user.subscribe((res: any) => {
       if (res?.id)
         this.http.getUserDetails(res.id).subscribe((res: any) => {
+          this.loader.hide();
           this.user = res;
           this.userType = res.userType;
-
+          this.notification.error('Fail');
           this.newUserDetails = {
             email: res?.email ?? '',
             mobile: res?.mobile ?? '',
@@ -67,10 +73,13 @@ export class ProfileComponent implements OnInit {
       header: 'Switch User Type',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
+        this.loader.show();
         this.http.updateUserType(patchData).subscribe((res: any) => {
           this.activeUserType = this.userType ? true : false;
+          this.loader.hide();
           const userData = localStorage.getItem('userData');
           if (!userData) {
+            this.loader.hide();
             return;
           } else {
             const loadedData: {
@@ -135,9 +144,11 @@ export class ProfileComponent implements OnInit {
     this.editingStarted = true;
   }
   saveEdited() {
+    this.loader.show();
     this.http
       .updateUserDetails({ id: this.user?.id, user: this.newUserDetails })
       .subscribe((res: any) => {
+        this.loader.hide();
         this.editingStarted = false;
         this.user = res.user;
         this.newUserDetails = this.user;
@@ -159,11 +170,13 @@ export class ProfileComponent implements OnInit {
     (document.querySelector('#file') as HTMLInputElement).click();
   }
   onFileSelected(evnt: any) {
+    this.loader.show();
     const file = evnt.target.files[0];
     if (file) {
       this.http
         .updateUserProfileImage({ id: this.user?.id, file: file })
         .subscribe((res: any) => {
+          this.loader.hide();
           this.user.image = res.image;
         });
     }
