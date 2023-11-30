@@ -44,18 +44,23 @@ export class ProfileComponent implements OnInit {
     this.checkDialogWidth();
     this.authService.user.subscribe((res: any) => {
       if (res?.id)
-        this.http.getUserDetails(res.id).subscribe((res: any) => {
-          this.loader.hide();
-          this.user = res;
-          this.userType = res.userType;
-          this.notification.error('Fail');
-          this.newUserDetails = {
-            email: res?.email ?? '',
-            mobile: res?.mobile ?? '',
-            city: res?.city ?? '',
-            state: res?.state ?? '',
-            address: res?.address ?? '',
-          };
+        this.http.getUserDetails(res.id).subscribe({
+          next: (res: any) => {
+            this.user = res;
+            this.userType = res.userType;
+            this.newUserDetails = {
+              email: res?.email ?? '',
+              mobile: res?.mobile ?? '',
+              city: res?.city ?? '',
+              state: res?.state ?? '',
+              address: res?.address ?? '',
+            };
+            this.loader.hide();
+          },
+          error: (error) => {
+            this.loader.hide();
+            this.notification.error('Failed to load details.');
+          },
         });
     });
     this.baseUrl = environment.baseUrl;
@@ -74,37 +79,38 @@ export class ProfileComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.loader.show();
-        this.http.updateUserType(patchData).subscribe((res: any) => {
-          this.activeUserType = this.userType ? true : false;
-          this.loader.hide();
-          const userData = localStorage.getItem('userData');
-          if (!userData) {
+        this.http.updateUserType(patchData).subscribe({
+          next: (res: any) => {
+            this.activeUserType = this.userType ? true : false;
             this.loader.hide();
-            return;
-          } else {
-            const loadedData: {
-              email: string;
-              name: string;
-              id: string;
-              token: string;
-              userType: number;
-            } = JSON.parse(userData);
+            this.notification.success('Changed user type');
+            const userData = localStorage.getItem('userData');
+            if (!userData) {
+              return;
+            } else {
+              const loadedData: {
+                email: string;
+                name: string;
+                id: string;
+                token: string;
+                userType: number;
+              } = JSON.parse(userData);
 
-            const user = new User(
-              res.user.email,
-              res.user.name,
-              loadedData.token,
-              res.user._id,
-              res.user.userType
-            );
-            this.authService.user.next(user);
-            localStorage.setItem('userData', JSON.stringify(user));
-          }
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: 'Message Content',
-          });
+              const user = new User(
+                res.user.email,
+                res.user.name,
+                loadedData.token,
+                res.user._id,
+                res.user.userType
+              );
+              this.authService.user.next(user);
+              localStorage.setItem('userData', JSON.stringify(user));
+            }
+          },
+          error: (err) => {
+            this.loader.hide();
+            this.notification.error('Failed to change user type');
+          },
         });
       },
       reject: (type: any) => {
@@ -147,11 +153,18 @@ export class ProfileComponent implements OnInit {
     this.loader.show();
     this.http
       .updateUserDetails({ id: this.user?.id, user: this.newUserDetails })
-      .subscribe((res: any) => {
-        this.loader.hide();
-        this.editingStarted = false;
-        this.user = res.user;
-        this.newUserDetails = this.user;
+      .subscribe({
+        next: (res: any) => {
+          this.loader.hide();
+          this.notification.success('Details updated successfully.');
+          this.editingStarted = false;
+          this.user = res.user;
+          this.newUserDetails = this.user;
+        },
+        error: () => {
+          this.loader.hide();
+          this.notification.error('Failed to update the details');
+        },
       });
   }
 
@@ -175,9 +188,16 @@ export class ProfileComponent implements OnInit {
     if (file) {
       this.http
         .updateUserProfileImage({ id: this.user?.id, file: file })
-        .subscribe((res: any) => {
-          this.loader.hide();
-          this.user.image = res.image;
+        .subscribe({
+          next: (res: any) => {
+            this.loader.hide();
+            this.notification.success('Image updated successfully.');
+            this.user.image = res.image;
+          },
+          error: (err) => {
+            this.loader.hide();
+            this.notification.error('Failed to update image');
+          },
         });
     }
   }

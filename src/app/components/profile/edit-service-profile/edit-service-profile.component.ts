@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environment/base';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Loader } from 'src/app/services/loader.service';
+import { Notification } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-edit-service-profile',
@@ -18,7 +19,7 @@ import { Loader } from 'src/app/services/loader.service';
 export class EditServiceProfileComponent implements OnInit {
   private user: any;
   public base: any;
-  serviceId: any;
+  private serviceId: any;
 
   fields = {
     id: 0,
@@ -87,7 +88,8 @@ export class EditServiceProfileComponent implements OnInit {
     private http: HttpService,
     private route: Router,
     public confirmService: ConfirmationService,
-    private loader: Loader
+    private loader: Loader,
+    private notification: Notification
   ) {
     this.serviceId = this.route.url.split('/')[2];
     this.base = environment.baseUrl;
@@ -103,10 +105,10 @@ export class EditServiceProfileComponent implements OnInit {
         next: (res: any) => {
           this.loader.hide();
           this.fields = res.service;
-          console.log(this.fields);
         },
         error: (error) => {
           this.loader.hide();
+          this.notification.error('Failed to load details.');
           console.error(error);
         },
       });
@@ -128,10 +130,11 @@ export class EditServiceProfileComponent implements OnInit {
           next: (res: any) => {
             this.loader.hide();
             this.fields.image = res.image;
+            this.notification.success('Image uploaded Successfully');
           },
           error: (err) => {
             this.loader.hide();
-            console.error(err);
+            this.notification.error('Failed to upload the image.');
           },
         });
     }

@@ -16,10 +16,10 @@ export class HttpService {
 
   searchServices(text: any = '', filters: any = {}) {
     const body = {
-      searchText: text,
+      query: text,
       filters: filters,
     };
-    return this.http.post<any>(this.apiUrl, body);
+    return this.http.post<any>(this.apiUrl + 'services/search', body);
   }
 
   getUserDetails(id: any) {

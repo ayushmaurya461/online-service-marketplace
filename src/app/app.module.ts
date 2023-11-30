@@ -27,8 +27,7 @@ import { ServicesComponent } from './components/services/services.component';
 import { FeaturedComponent } from './components/home/featured/featured.component';
 import { ServiceOptionsComponent } from './components/home/service-options/service-options.component';
 import { FormsModule } from '@angular/forms';
-import { LayoutComponent } from './components/services/layout/layout.component';
-import { GridLayoutComponent } from './components/services/layout/grid-layout/grid-layout.component';
+import { GridLayoutComponent } from './components/services/grid-layout/grid-layout.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { UserComponent } from './shared/user/user.component';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
@@ -48,7 +47,6 @@ import { EditServiceProfileComponent } from './components/profile/edit-service-p
     ServicesComponent,
     FeaturedComponent,
     ServiceOptionsComponent,
-    LayoutComponent,
     GridLayoutComponent,
     UserComponent,
     ProfileComponent,

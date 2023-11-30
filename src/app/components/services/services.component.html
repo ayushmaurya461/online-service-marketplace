@@ -1,7 +1,23 @@
-<app-layout></app-layout>
-<button
+<div class="layout">
+  <div class="options">
+    <h3>Services</h3>
+    <div class="filters">
+      <input
+        type="text"
+        name="query"
+        placeholder="Search"
+        class="form-control"
+        id="query"
+        [(ngModel)]="query"
+      />
+      <button class="btn btn-success" (click)="search()">Search</button>
+    </div>
+  </div>
+  <grid-layout [services]="services"></grid-layout>
+</div>
+<!-- <button
   style="width: fit-content; padding: auto 30px"
   class="btn btn-primary m-3"
 >
   Load more
-</button>
+</button> -->
