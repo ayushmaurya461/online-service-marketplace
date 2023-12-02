@@ -9,11 +9,15 @@
         needs. Thousands of options are just a click away.
       </p>
       <ng-template pTemplate="footer">
-        <p-button label="Look for Services" icon="pi pi-search"></p-button>
+        <p-button
+          label="Look for Services"
+          routerLink="/services"
+          icon="pi pi-search"
+        ></p-button>
       </ng-template>
     </p-card>
   </div>
-  <div class="option">
+  <div class="option" *ngIf="!userType">
     <p-card
       header="Join Our Service Provider Network"
       [style]="{ width: '100%' }"
@@ -27,7 +31,7 @@
       </p>
       <ng-template pTemplate="footer">
         <p-button
-          [routerLink]="'/services'"
+          [routerLink]="'/profile'"
           label="Become a Service Provider"
           icon="pi pi-send"
         ></p-button>

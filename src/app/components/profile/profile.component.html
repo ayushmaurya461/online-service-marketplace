@@ -20,6 +20,7 @@
   <div class="profile-introduction">
     <div class="toggle-to-service-provider">
       <button
+        *ngIf="userType"
         class="btn btn-success"
         (click)="naviagteToEditProfile(user?.service ?? 0)"
       >
@@ -123,9 +124,5 @@
     </div>
   </div>
 </div>
-
-<app-service-profile *ngIf="activeUserType"></app-service-profile>
-
-<div class="contact-us"></div>
 
 <p-confirmDialog [style]="{ width: dialogWidth }"></p-confirmDialog>

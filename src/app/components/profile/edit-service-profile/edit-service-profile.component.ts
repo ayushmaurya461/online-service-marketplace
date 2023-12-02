@@ -30,6 +30,7 @@ export class EditServiceProfileComponent implements OnInit {
     contact: {
       mobile: null,
       email: '',
+      whatsapp: '',
       website: '',
       socialMediaLinks: [
         {

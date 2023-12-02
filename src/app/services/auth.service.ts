@@ -55,6 +55,7 @@ export class AuthService {
         if (res.token_verified) {
           this.isAuthenticated.next(true);
           this.user.next(user);
+          this.userType = user.userType;
         } else {
           this.logoutAndRedirect();
         }

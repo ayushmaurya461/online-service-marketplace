@@ -36,6 +36,7 @@ import { ServiceFullDetailsComponent } from './components/service-full-details/s
 import { ServiceProfileComponent } from './components/profile/service-profile/service-profile.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { EditServiceProfileComponent } from './components/profile/edit-service-profile/edit-service-profile.component';
+import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { EditServiceProfileComponent } from './components/profile/edit-service-p
     ServiceFullDetailsComponent,
     ServiceProfileComponent,
     EditServiceProfileComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,

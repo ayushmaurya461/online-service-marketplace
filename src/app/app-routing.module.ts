@@ -5,6 +5,8 @@ import { ServicesComponent } from './components/services/services.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ServiceFullDetailsComponent } from './components/service-full-details/service-full-details.component';
 import { EditServiceProfileComponent } from './components/profile/edit-service-profile/edit-service-profile.component';
+import { AboutComponent } from './components/about/about.component';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -12,7 +14,12 @@ const routes: Routes = [
   { path: 'services', component: ServicesComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'service/:id', component: ServiceFullDetailsComponent },
-  { path: 'edit-service-profile/:id', component: EditServiceProfileComponent },
+  { path: 'about', component: AboutComponent },
+  {
+    path: 'edit-service-profile/:id',
+    component: EditServiceProfileComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({
