@@ -27,6 +27,18 @@
           placeholder=""
         />
       </div>
+      <div class="input-group" *ngIf="!login">
+        <label for="mobile">Mobile</label>
+        <input
+          type="text"
+          [(ngModel)]="mobile"
+          name="mobile"
+          autocomplete="off"
+          id="mobile"
+          required
+          placeholder=""
+        />
+      </div>
       <div class="input-group">
         <label for="password">Password</label>
         <input

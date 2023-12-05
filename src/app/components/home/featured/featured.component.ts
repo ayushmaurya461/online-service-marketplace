@@ -1,4 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { HttpService } from 'src/app/services/http.service';
+import { Notification } from 'src/app/services/notification.service';
+import { environment } from 'src/environment/base';
 
 @Component({
   selector: 'app-featured',
@@ -7,10 +10,16 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class FeaturedComponent implements OnInit {
   @Input() serviceName!: string;
-  @Input() services!: any;
+  services!: any;
   responsiveOptions!: any[];
+  loading = false;
+  public baseUrl = '';
+
+  constructor(private http: HttpService, private notification: Notification) {}
 
   ngOnInit(): void {
+    this.baseUrl = environment.baseUrl;
+    this.loading = true;
     this.responsiveOptions = [
       {
         breakpoint: '1199px',
@@ -28,5 +37,13 @@ export class FeaturedComponent implements OnInit {
         numScroll: 1,
       },
     ];
+
+    this.http.getFeatured(this.serviceName).subscribe({
+      next: (res: any) => {
+        this.services = res.data;
+        this.loading = false;
+      },
+      error: () => {},
+    });
   }
 }

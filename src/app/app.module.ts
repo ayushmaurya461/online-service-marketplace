@@ -16,6 +16,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { ChipsModule } from 'primeng/chips';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { SkeletonModule } from 'primeng/skeleton';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -76,6 +77,7 @@ import { AboutComponent } from './components/about/about.component';
     ConfirmDialogModule,
     ToastModule,
     ChipsModule,
+    SkeletonModule,
     MultiSelectModule,
   ],
   providers: [

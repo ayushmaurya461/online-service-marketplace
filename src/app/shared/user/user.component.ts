@@ -14,6 +14,7 @@ export class UserComponent {
   email: string = '';
   password: string = '';
   name: string = '';
+  mobile = '';
   login = true;
   isAuthenticated = false;
   @Output() loggedIn: EventEmitter<any> = new EventEmitter<any>();
@@ -30,6 +31,7 @@ export class UserComponent {
     this.email = '';
     this.password = '';
     this.name = '';
+    this.mobile = '';
     this.login = !this.login;
   }
 
@@ -54,7 +56,7 @@ export class UserComponent {
           });
       } else {
         userSubscription = this.authService
-          .signup(this.name, this.email, this.password)
+          .signup(this.name, this.email, this.mobile, this.password)
           .subscribe({
             next: (res) => {
               this.router.navigate(['/home']);

@@ -82,6 +82,7 @@ export class ProfileComponent implements OnInit {
         this.http.updateUserType(patchData).subscribe({
           next: (res: any) => {
             this.activeUserType = this.userType ? true : false;
+            console.log(res);
             this.loader.hide();
             this.notification.success('Changed user type');
             const userData = localStorage.getItem('userData');
@@ -93,17 +94,20 @@ export class ProfileComponent implements OnInit {
                 name: string;
                 id: string;
                 token: string;
+                mobile: string;
                 userType: number;
               } = JSON.parse(userData);
 
               const user = new User(
-                res.user.email,
-                res.user.name,
+                loadedData.email,
+                loadedData.name,
                 loadedData.token,
-                res.user._id,
-                res.user.userType
+                loadedData.mobile,
+                loadedData.id,
+                res.userType
               );
               this.authService.user.next(user);
+              this.authService.userType = user.userType;
               localStorage.setItem('userData', JSON.stringify(user));
             }
           },

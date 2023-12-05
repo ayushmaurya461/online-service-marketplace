@@ -14,10 +14,16 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  signup(name: string, email: string, password: string): Observable<any> {
+  signup(
+    name: string,
+    email: string,
+    mobile: any,
+    password: string
+  ): Observable<any> {
     const body = {
       name: name,
       email: email,
+      mobile: mobile,
       password: password,
     };
     return this.http.post(this.baseUrl + 'user/signup', body).pipe(
@@ -26,6 +32,7 @@ export class AuthService {
           email,
           response.name,
           response.token,
+          response.mobile,
           response.id,
           response.userType
         );
@@ -42,9 +49,9 @@ export class AuthService {
     }
 
     const loadedData = JSON.parse(userData);
-    const { email, name, id, token, userType } = loadedData;
+    const { email, name, id, token, mobile, userType } = loadedData;
 
-    const user = new User(email, name, token, id, userType);
+    const user = new User(email, name, token, mobile, id, userType);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
@@ -82,6 +89,7 @@ export class AuthService {
           email,
           response.name,
           response.token,
+          response.mobile,
           response.id,
           response.userType
         );

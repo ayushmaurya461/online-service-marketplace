@@ -57,6 +57,12 @@ export class HttpService {
     return this.http.post(this.apiUrl + 'services', data);
   }
 
+  getFeatured(name: string) {
+    return this.http.post(this.apiUrl + 'services/featured', {
+      serviceName: name,
+    });
+  }
+
   updateServiceProfileImage(body: any) {
     const data = new FormData();
     data.append('id', body.id);

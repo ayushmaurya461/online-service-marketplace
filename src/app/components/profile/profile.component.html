@@ -44,7 +44,7 @@
     </div>
     <div class="intro" *ngIf="!editingStarted">
       <button (click)="startEditing()"><i class="pi pi-pencil"></i></button>
-      <h5>Ayush Maurya</h5>
+      <h5>{{ user?.name }}</h5>
       <p>
         <span class="p-blue">Email : </span>{{ user?.email ?? "Not Available" }}
       </p>

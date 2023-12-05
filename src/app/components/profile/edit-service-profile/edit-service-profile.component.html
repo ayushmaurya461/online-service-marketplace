@@ -215,16 +215,16 @@
       <div class="col-md-3">
         <input
           type="text"
-          name="pricing_{{ i }}"
+          name="price_{{ i }}"
           class="form-control"
           placeholder="Name of Service"
-          id="pricing_{{ i }}"
+          id="price_{{ i }}"
           [(ngModel)]="price.serviceName"
         />
       </div>
       <div class="col-md-2">
         <input
-          type="text"
+          type="number"
           name="startsAt_{{ i }}"
           class="form-control"
           placeholder="Starts At"
@@ -276,9 +276,9 @@
           <td class="d-flex align-items-center">{{ bhours.day }}</td>
           <td>
             <input
-              type="text"
-              name="monday_start{{ i }}"
-              id="monday_start{{ i }}"
+              type="time"
+              name="start{{ i }}"
+              id="start{{ i }}"
               placeholder=" Hrs:Mins"
               [(ngModel)]="bhours.start"
               class="form-control"
@@ -286,10 +286,10 @@
           </td>
           <td>
             <input
-              type="text"
-              name="monday_end{{ i }}"
+              type="time"
+              name="end{{ i }}"
               placeholder=" Hrs:Mins"
-              id="monday_end{{ i }}"
+              id="end{{ i }}"
               [(ngModel)]="bhours.end"
               class="form-control"
             />
@@ -319,6 +319,19 @@
           class="form-control"
           [(ngModel)]="fields.paymentMethods"
         ></textarea>
+      </div>
+    </div>
+    <hr />
+    <h5>Overall Price Range</h5>
+    <div class="row">
+      <div class="col-md-12">
+        <input
+          name="amount"
+          id="amount"
+          type="text"
+          class="form-control"
+          [(ngModel)]="fields.overallPriceRange"
+        />
       </div>
     </div>
     <hr />
