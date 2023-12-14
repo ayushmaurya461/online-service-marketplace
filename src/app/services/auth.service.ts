@@ -26,6 +26,7 @@ export class AuthService {
       mobile: mobile,
       password: password,
     };
+
     return this.http.post(this.baseUrl + 'user/signup', body).pipe(
       tap((response: any) => {
         const newUser = new User(
@@ -42,6 +43,7 @@ export class AuthService {
       })
     );
   }
+
   autoLogin() {
     const userData = localStorage.getItem('userData');
     if (!userData) {

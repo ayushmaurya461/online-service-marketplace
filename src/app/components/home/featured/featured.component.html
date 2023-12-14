@@ -31,7 +31,9 @@
               <i class="text-warning pi pi-star-fill"></i>
             </h6>
             <div class="d-flex justify-content-around">
-              <p-button type="button" icon="pi pi-whatsapp"></p-button>
+              <a href="{{ product?.contact?.whatsapp }}" target="_blank">
+                <p-button type="button" icon="pi pi-whatsapp"></p-button>
+              </a>
               <p-button
                 type="button"
                 icon="pi pi-id-card"

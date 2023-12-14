@@ -7,6 +7,19 @@
     <h6 class="font-weight-bold">
       {{ details?.description }}
     </h6>
+    <div class="row d-flex">
+      <div>
+        <p-rating
+          *ngIf="serviceRating"
+          [(ngModel)]="serviceRating"
+          [readonly]="true"
+          [cancel]="false"
+        ></p-rating>
+        <p *ngIf="details?.reviews">
+          (Based on {{ details.reviews.length }} Reviews)
+        </p>
+      </div>
+    </div>
     <p class="p-blue mb-0">Provider Name</p>
     <p>{{ details?.name }}</p>
     <div class="price">
@@ -14,6 +27,7 @@
         Price Range : Rs. {{ details?.overallPriceRange }}
       </p>
     </div>
+
     <hr />
     <p>
       <span>Mobile</span> : {{ details?.contact.mobile }} &nbsp;&nbsp;&nbsp;
@@ -34,16 +48,7 @@
           details?.address.postalCode
       }}
     </p>
-    <div class="row d-flex">
-      <div>
-        <p-rating
-          *ngIf="details?.overallRating"
-          [(ngModel)]="details.overallRating"
-          [readonly]="true"
-          [cancel]="false"
-        ></p-rating>
-      </div>
-    </div>
+
     <hr />
     <div class="liscense p-blue" *ngFor="let liscence of details?.license">
       <p>{{ liscence?.name }} by {{ liscence?.issuedBy }}</p>
@@ -66,11 +71,75 @@
     <h5>Pricing</h5>
     <div class="pricing">
       <div class="card" *ngFor="let p of details?.pricing">
-        <p class="p-blue">{{ p?.serviceName }}</p>
-        <p>{{ p?.price }} {{ p?.startsAt }}</p>
-        <p>{{ p?.description }}</p>
+        <p class="p-blue"><strong>Name : </strong> {{ p?.serviceName }}</p>
+        <p><strong>Starting From :</strong> {{ p?.startsAt }}</p>
+        <p><strong>Description :</strong> {{ p?.description }}</p>
       </div>
     </div>
   </div>
 </div>
 
+<div class="faq">
+  <div>
+    <h5>Frequently Asked Questions</h5>
+  </div>
+  <div class="mb-3" *ngFor="let qa of details?.faq; let i = index">
+    <div>
+      <p>
+        <strong>Q{{ i + 1 }}. {{ qa.que }} </strong>
+      </p>
+      <p>&nbsp; {{ qa.ans }}</p>
+    </div>
+  </div>
+</div>
+
+<div class="reviews mt-3 mb-4">
+  <div>
+    <h5>Reviews</h5>
+    <div class="rev" *ngFor="let rev of details?.reviews">
+      <p-rating
+        [(ngModel)]="rev.rating"
+        [readonly]="true"
+        [cancel]="false"
+      ></p-rating>
+      <p>{{ rev.review }}</p>
+    </div>
+    <strong *ngIf="!details?.reviews"
+      >No Reviews Found. Be the first to write a review.</strong
+    ><br />
+    <button
+      *ngIf="!sameUser"
+      class="btn btn-success mt-3"
+      (click)="triggerReviewModal()"
+    >
+      Post a Review
+    </button>
+  </div>
+</div>
+
+<p-dialog
+  header="Post a Review"
+  [modal]="true"
+  [(visible)]="visible"
+  [style]="{ width: '40vw' }"
+>
+  <div>
+    <label for="rating">Rating</label><br />
+    <p-rating [(ngModel)]="rating" [cancel]="false"></p-rating>
+  </div>
+  <div class="mt-2">
+    <label for="review">Review</label>
+    <textarea
+      name="review"
+      id="review"
+      [(ngModel)]="review"
+      rows="2"
+      class="form-control"
+    ></textarea>
+  </div>
+  <div class="div">
+    <button class="btn btn-secondary mt-3" (click)="submitReview()">
+      Submit
+    </button>
+  </div>
+</p-dialog>

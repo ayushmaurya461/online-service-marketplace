@@ -10,6 +10,7 @@ th {
   border: 2px black solid;
   display: flex;
   justify-content: center;
+  overflow: hidden;
   padding: 5px;
 }
 

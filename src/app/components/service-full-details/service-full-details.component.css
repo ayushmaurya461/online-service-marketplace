@@ -4,6 +4,9 @@ p {
   margin: 2px 0;
 }
 
+h5 {
+  font-weight: 700;
+}
 .basic-details {
   width: 80vw;
   margin: auto;
@@ -59,8 +62,6 @@ img {
 }
 .service-details > div {
   flex: 1;
-  padding: 20px;
-  box-shadow: 0 0 5px #d4d4d4;
   border-radius: 10px;
 }
 
@@ -79,8 +80,21 @@ img {
   flex: 1;
 }
 
+.faq,
+.reviews {
+  width: 80vw;
+  margin: auto;
+  padding: 20px 20px;
+}
+
 .frequently-asked-questions > li {
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
+}
+
+.rev {
+  border-bottom: 1px solid rgb(212, 212, 212);
+  max-width: 500px;
+  padding: 10px 0;
 }

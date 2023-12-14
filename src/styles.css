@@ -305,3 +305,15 @@ button.p-confirm-dialog-accept:hover {
     width: 15px;
   }
 }
+
+.p-carousel-item {
+  max-width: 350px;
+}
+
+.p-carousel-items-container {
+  justify-content: center;
+}
+
+.p-carousel-items-container .p-carousel-item > div {
+  height: 385px;
+}

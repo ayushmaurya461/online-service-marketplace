@@ -45,6 +45,10 @@ export class HttpService {
     return this.http.post(this.apiUrl + 'user/update-service', body);
   }
 
+  postReview(body: any) {
+    return this.http.post(this.apiUrl + 'services/review', body);
+  }
+
   getServiceDetails(id: any) {
     return this.http.post(this.apiUrl + 'services/get', { id: id });
   }

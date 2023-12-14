@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { Loader } from 'src/app/services/loader.service';
+import { Notification } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'user',
@@ -22,7 +23,8 @@ export class UserComponent {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private loader: Loader
+    private loader: Loader,
+    private notification: Notification
   ) {}
 
   submitCredentials() {}
@@ -45,12 +47,14 @@ export class UserComponent {
           .login(this.email, this.password)
           .subscribe({
             next: (res) => {
+              this.notification.success('Logged In');
               this.router.navigate(['/home']);
               this.loggedIn.emit(true);
               this.loader.hide();
             },
             error: (err) => {
               console.log(err);
+              this.notification.error('Incorrect Email or Password');
               this.loader.hide();
             },
           });
